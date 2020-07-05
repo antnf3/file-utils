@@ -3,18 +3,18 @@
 ## isFile
 
 ```javascript
-
-isFile("./abc.json").then(data => console.log(data));
-or
-const isFileExists = await isFile("./abc.json");
+const file = path.join(__dirname, "./abc.json");
+isFile(file).then(data => console.log(data));
+// or
+const isFileExists = await isFile(file);
 
 interface fileDataProps {
   abc: number;
 }
 
-getFileData<fileDataProps[]>("./abc.json").then((data) => console.log(data));
+getFileData<fileDataProps[]>(file).then((data) => console.log(data));
 
-setFileData("./abc.json", "452").then((data) => console.log(data));
+setFileData(file, "452").then((data) => console.log(data));
 ```
 
 ## getFileData
@@ -24,18 +24,19 @@ setFileData("./abc.json", "452").then((data) => console.log(data));
 interface fileDataProps {
   abc: number;
 }
-
-getFileData<fileDataProps[]>("./abc.json").then((data) => console.log(data));
+const file = path.join(__dirname, "./abc.json");
+getFileData<fileDataProps[]>(file).then((data) => console.log(data));
 or
-const fileData = await getFileData<fileDataProps[]>("./abc.json");
+const fileData = await getFileData<fileDataProps[]>(file);
 ```
 
 ## setFileData
 
 ```javascript
-setFileData("./abc.json", "452").then((data) => console.log(data));
+const file = path.join(__dirname, "./abc.json");
+setFileData(file, "452").then((data) => console.log(data));
 or;
-const isDone = await setFileData("./abc.json", "452");
+const isDone = await setFileData(file, "452");
 ```
 
 ## isDierctory
@@ -70,17 +71,18 @@ const downloadImg = await downloadImage(
 ## downloadMultiImage
 
 ```javascript
+const dir = path.join(__dirname, "ccc");
 downloadMultiImage(
   [
     "https://static.coupangcdn.com/image/retail/images/2020/05/04/14/2/e241b19a-4a59-40a1-aca1-31f5fd9de6e8.jpg",
   ],
-  "../test"
+  dir
 ).then((data) => console.log(data));
 // or
 const downloadList = await downloadMultiImage(
   [
     "https://static.coupangcdn.com/image/retail/images/2020/05/04/14/2/e241b19a-4a59-40a1-aca1-31f5fd9de6e8.jpg",
   ],
-  "../test"
+  dir
 );
 ```

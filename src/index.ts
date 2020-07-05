@@ -9,7 +9,7 @@ import axios from "axios";
 async function isFile(localFilePath: string): Promise<boolean> {
   let rtn = false;
   try {
-    const result = await pfs.stat(path.join(__dirname, localFilePath));
+    const result = await pfs.stat(localFilePath);
     rtn = true; // 파일이 존재하면
   } catch (error) {
     // console.log(error);
@@ -27,10 +27,7 @@ async function getFileData<T>(localFilePath: string): Promise<T> {
     const isFileExists = await isFile(localFilePath);
     // 파일이 존재하면
     if (isFileExists) {
-      let data = await pfs.readFile(
-        path.join(__dirname, localFilePath),
-        "utf-8"
-      );
+      let data = await pfs.readFile(localFilePath, "utf-8");
       try {
         jData = JSON.parse(data);
       } catch (e) {
@@ -58,7 +55,7 @@ async function setFileData(
   try {
     const isExistsFile = await isFile(localFilePath);
     if (isExistsFile) {
-      await pfs.writeFile(path.join(__dirname, localFilePath), data);
+      await pfs.writeFile(localFilePath, data);
       returnVal = true;
     } else {
       console.log(`${localFilePath} 파일이 존재하지 않습니다.`);
@@ -108,8 +105,8 @@ async function downloadImage(
   const exts = imgUrl.substring(point);
   downloadPath = downloadPath || "";
   const imageName = `${uuid4()}${exts}`;
-  await makeDir(path.join(__dirname, downloadPath)); // 디렉토리가 존해하지않으면 생성
-  const downPath = path.resolve(__dirname, downloadPath, `${imageName}`);
+  await makeDir(downloadPath); // 디렉토리가 존해하지않으면 생성
+  const downPath = path.resolve(downloadPath, `${imageName}`);
   const writer = fs.createWriteStream(downPath);
 
   const response = await axios({
