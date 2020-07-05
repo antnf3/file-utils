@@ -2,6 +2,7 @@ import fs, { promises as pfs } from "fs";
 import path from "path";
 import { v4 as uuid4 } from "uuid";
 import axios from "axios";
+import { ZlibReset } from "zlib";
 
 /**
  * 파일 존재여부 확인
@@ -53,14 +54,14 @@ async function setFileData(
 ): Promise<boolean> {
   let returnVal = false;
   try {
-    const isExistsFile = await isFile(localFilePath);
-    if (isExistsFile) {
-      await pfs.writeFile(localFilePath, data);
-      returnVal = true;
-    } else {
-      console.log(`${localFilePath} 파일이 존재하지 않습니다.`);
-      returnVal = false;
-    }
+    //const isExistsFile = await isFile(localFilePath);
+    //if (isExistsFile) {
+    await pfs.writeFile(localFilePath, data);
+    returnVal = true;
+    //} else {
+    //  console.log(`${localFilePath} 파일이 존재하지 않습니다.`);
+    //  returnVal = false;
+    //}
   } catch (error) {
     console.log("에러" + error);
     returnVal = false;
