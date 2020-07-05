@@ -1,12 +1,13 @@
 {
   "name": "@antnf3/file-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "lib/index.js",
   "files": [
     "lib/**/*"
   ],
   "types": "lib/index.d.ts",
   "author": "antnf3 <antnf3@gmail.com>",
+  "description": "file utils",
   "repository": {
     "type": "git",
     "url": "https://github.com/antnf3/file-utils.git"
@@ -22,7 +23,12 @@
   },
   "devDependencies": {
     "@types/node": "^14.0.14",
+    "@types/uuid": "^8.0.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "uuid": "^8.2.0"
   }
 }
