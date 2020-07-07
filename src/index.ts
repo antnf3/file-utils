@@ -2,7 +2,6 @@ import fs, { promises as pfs } from "fs";
 import path from "path";
 import { v4 as uuid4 } from "uuid";
 import axios from "axios";
-import { ZlibReset } from "zlib";
 
 /**
  * 파일 존재여부 확인
@@ -87,8 +86,9 @@ async function isDierctory(dirPath: string): Promise<boolean> {
  * 디렉토리 생성
  * @param dirName
  */
-async function makeDir(dirPath: string) {
+async function makeDir(dirPath: string): Promise<void> {
   const isExistsDir = await isDierctory(dirPath);
+  console.log(isExistsDir);
   if (!isExistsDir) {
     const abc = await pfs.mkdir(dirPath);
   }
@@ -135,6 +135,7 @@ async function downloadMultiImage(
   let returnVal: string[] = [];
   downloadPath = downloadPath || "";
   if (arrImgUrl.length > 0) {
+    await makeDir(downloadPath); // 디렉토리가 존해하지않으면 생성
     const imgPromise = arrImgUrl.map(async (imgUrl) => {
       const isHttp = imgUrl.indexOf("http:");
       const isHttps = imgUrl.indexOf("https:");

@@ -81,7 +81,12 @@ downloadMultiImage(
 // or
 const downloadList = await downloadMultiImage(
   [
-    "https://static.coupangcdn.com/image/retail/images/2020/05/04/14/2/e241b19a-4a59-40a1-aca1-31f5fd9de6e8.jpg",
+    "https://static.coupangcdn.com/image/retail/images/2020/06/01/14/2/e9c557d2-6f92-4f07-b93e-33c74efdf8dc.jpg",
+    "https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202006/25/8007917683531862895/d6664573-b707-4166-9d53-6574ed42edbd.jpg",
+    "https://thumbnail8.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202006/25/8358360043679892272/19dbf4a1-e542-4142-b8c2-c6fede3007f2.jpg",
+    "https://thumbnail9.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202006/20/1792200778088153550/d710e760-3514-4694-b25e-134f430ff86a.jpg",
+    "https://thumbnail7.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202006/24/3331616985593799400/e3da2f4f-4a89-4f3a-8bee-2b4249548d2b.jpg",
+    "https://thumbnail6.coupangcdn.com/thumbnails/local/320/image2/PRODUCTREVIEW/202006/20/5188510396945357581/5e101faa-d6d0-4c31-83bc-58cbe222a3eb.jpg",
   ],
   dir
 );
