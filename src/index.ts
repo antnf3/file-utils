@@ -88,7 +88,7 @@ async function isDierctory(dirPath: string): Promise<boolean> {
  */
 async function makeDir(dirPath: string): Promise<void> {
   const isExistsDir = await isDierctory(dirPath);
-  console.log(isExistsDir);
+  // console.log(isExistsDir);
   if (!isExistsDir) {
     const abc = await pfs.mkdir(dirPath);
   }
