@@ -1,7 +1,7 @@
+import axios from "axios";
 import fs, { promises as pfs } from "fs";
 import path from "path";
 import { v4 as uuid4 } from "uuid";
-import axios from "axios";
 
 /**
  * 파일 존재여부 확인
@@ -95,6 +95,24 @@ async function makeDir(dirPath: string): Promise<void> {
 }
 
 /**
+ * 이미지파일 확장자 확인
+ * @param fileExts: 이미지파일 확장자
+ * @return fileExts: 이미지파일 확장자
+ */
+function checkImgFile(fileExts: string) {
+  if (
+    fileExts != ".jpg" &&
+    fileExts != ".png" &&
+    fileExts != ".jpeg" &&
+    fileExts != ".gif" &&
+    fileExts != ".bmp"
+  ) {
+    return ".jpg";
+  }
+  return fileExts;
+}
+
+/**
  * 단건 이미지파일 다운로드
  * @param imgUrl
  */
@@ -103,7 +121,7 @@ async function downloadImage(
   downloadPath?: string
 ): Promise<string> {
   const point = imgUrl.lastIndexOf(".");
-  const exts = imgUrl.substring(point);
+  const exts = checkImgFile(imgUrl.substring(point));
   downloadPath = downloadPath || "";
   const imageName = `${uuid4()}${exts}`;
   await makeDir(downloadPath); // 디렉토리가 존해하지않으면 생성
