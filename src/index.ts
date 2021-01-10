@@ -70,6 +70,8 @@ async function setFileData(
 
 /**
  * 디렉토리 존재여부
+ * @param dirPath: string
+ * @return result: Promise<boolean>
  */
 async function isDierctory(dirPath: string): Promise<boolean> {
   let result = false;
@@ -85,12 +87,13 @@ async function isDierctory(dirPath: string): Promise<boolean> {
 /**
  * 디렉토리 생성
  * @param dirName
+ * @return Promise<void>
  */
 async function makeDir(dirPath: string): Promise<void> {
   const isExistsDir = await isDierctory(dirPath);
   // console.log(isExistsDir);
   if (!isExistsDir) {
-    const abc = await pfs.mkdir(dirPath);
+    await pfs.mkdir(dirPath);
   }
 }
 
@@ -114,16 +117,23 @@ function checkImgFile(fileExts: string) {
 
 /**
  * 단건 이미지파일 다운로드
- * @param imgUrl
+ * @param imgUrl: string
+ * @param downloadPath: string | undefined
+ * @param prefix: string | undefined
+ * @param suffix: string  | undefined
  */
 async function downloadImage(
   imgUrl: string,
-  downloadPath?: string
+  downloadPath?: string,
+  prefix?: string,
+  suffix?: string
 ): Promise<string> {
+  prefix = prefix || "";
+  suffix = suffix || "";
   const point = imgUrl.lastIndexOf(".");
   const exts = checkImgFile(imgUrl.substring(point));
   downloadPath = downloadPath || "";
-  const imageName = `${uuid4()}${exts}`;
+  const imageName = `${prefix}${uuid4()}${suffix}${exts}`;
   await makeDir(downloadPath); // 디렉토리가 존해하지않으면 생성
   const downPath = path.resolve(downloadPath, `${imageName}`);
   const writer = fs.createWriteStream(downPath);
@@ -145,10 +155,16 @@ async function downloadImage(
 
 /**
  * 멀티 이미지파일 다운로드
+ * @param arrImgUrl: string[]
+ * @param downloadPath: string | undefined
+ * @param prefix: string | undefined
+ * @param suffix: string  | undefined
  */
 async function downloadMultiImage(
   arrImgUrl: string[],
-  downloadPath?: string
+  downloadPath?: string,
+  prefix?: string,
+  suffix?: string
 ): Promise<string[]> {
   let returnVal: string[] = [];
   downloadPath = downloadPath || "";
@@ -160,7 +176,7 @@ async function downloadMultiImage(
       if (isHttp === -1 && isHttps === -1) {
         imgUrl = `http:${imgUrl}`;
       }
-      return await downloadImage(imgUrl, downloadPath);
+      return await downloadImage(imgUrl, downloadPath, prefix, suffix);
     });
     returnVal = await Promise.all(imgPromise);
   }
