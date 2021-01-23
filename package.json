@@ -1,6 +1,6 @@
 {
   "name": "@antnf3/file-utils",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "lib/index.js",
   "files": [
     "lib/**/*"
@@ -22,7 +22,7 @@
     "start": "node lib/index.js"
   },
   "devDependencies": {
-    "@types/node": "^14.14.20",
+    "@types/node": "^14.14.22",
     "@types/uuid": "^8.3.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
